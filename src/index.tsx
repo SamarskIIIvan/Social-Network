@@ -9,7 +9,7 @@ import state from "./Redux/state";
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <App state={state} />
+            <App state={state}/>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')

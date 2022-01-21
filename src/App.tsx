@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import { StatePropsType} from "./Redux/state";
+import {Sidebar} from "./components/Sidebar/Sidebar";
 
 
 function App(props:StatePropsType) {
@@ -16,6 +17,7 @@ function App(props:StatePropsType) {
         <div className="App-wrapper">
             <Header/>
             <Nav/>
+            <Sidebar friends={props.state.sidebar.friends}/>
             <div className={"content"}>
                 <Routes>
                     <Route path={"profile"}  element={<Profile

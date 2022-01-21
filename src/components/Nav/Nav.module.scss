@@ -1,10 +1,15 @@
 .navBlock {
-    grid-area: n;
-    background-color: gray;
-    padding: 10px;
-  a{
+  grid-area: n;
+  background-color: gray;
+  padding: 10px;
+  text-align: center;
+
+  a {
     color: white;
     text-decoration: none;
   }
-  a:active{color: red}
+
+  a:active {
+    color: red
+  }
 }

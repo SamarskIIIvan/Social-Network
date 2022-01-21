@@ -1,3 +1,8 @@
+import avaFriend1 from "../components/Sidebar/Friends/imagesFriends/friend1.png"
+import avaFriend2 from "../components/Sidebar/Friends/imagesFriends/friend2.png"
+import avaFriend3 from "../components/Sidebar/Friends/imagesFriends/friend3.png"
+
+
 export type PostPropsType = {
     id: number
     message: string
@@ -21,6 +26,15 @@ export type PostsPropsType = {
     posts: PostPropsType[],
 }
 
+export type FriendsType = {
+    id: number
+    name: string
+    style: any
+}
+export type FriendsPropsType = {
+    friends: FriendsType[]
+}
+
 export type StatePropsType = {
     state: {
         profilePage: {
@@ -30,8 +44,12 @@ export type StatePropsType = {
             dialogs: DialogPropsType[]
             messages: MessagePropsType[]
         }
+        sidebar: {
+            friends: FriendsType[]
+        }
     }
 }
+
 
 const state = {
     profilePage: {
@@ -51,5 +69,12 @@ const state = {
             {id: 3, message: 'Hi i am Valera'},
         ],
     },
+    sidebar: {
+        friends: [
+            {id: 1, name: 'Valery', style: avaFriend1},
+            {id: 2, name: 'Roman', style: avaFriend2},
+            {id: 3, name: 'Steven', style: avaFriend3},
+        ]
+    }
 }
 export default state

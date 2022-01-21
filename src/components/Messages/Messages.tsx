@@ -5,15 +5,15 @@ import {Message} from "./Message/Message";
 import {MessagesPropsType} from "../../Redux/state";
 
 
-export function Messages(props:MessagesPropsType) {
+export function Messages(props: MessagesPropsType) {
 
 
     const dialogsElements = props.dialogs
-        .map((dialog)=><Dialog name={dialog.name} id={dialog.id} key={dialog.id}/>)
+        .map((dialog) => <Dialog name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
 
     const messagesElements = props.messages
-            .map((message)=><Message message={message.message} id={message.id} key={message.id}/>)
+        .map((message) => <Message message={message.message} id={message.id} key={message.id}/>)
 
     return (
         <div className={s.messagesBlock}>

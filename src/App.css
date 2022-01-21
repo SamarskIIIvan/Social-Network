@@ -1,12 +1,12 @@
 .App-wrapper {
     display: grid;
-    grid-template-rows: 90px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 90px 2fr;
+    grid-template-columns: 1fr 10fr ;
     grid-template-areas: "h h"
-                         "n c";
-    margin: 0 auto;
-}
+                         "n c"
+                         "s c";
 
+}
 .content {
     grid-area: c;
     background-color: rebeccapurple;
