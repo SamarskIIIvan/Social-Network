@@ -18,8 +18,9 @@ function App(props:StatePropsType) {
             <Nav/>
             <div className={"content"}>
                 <Routes>
-                    <Route path={"profile"}  element={<Profile posts={props.state.posts}/>}/>
-                    <Route path={"messages"} element={<Messages messages={props.state.messages} dialogs={props.state.dialogs}/>}/>
+                    <Route path={"profile"}  element={<Profile
+                        posts={props.state.profilePage.posts}/>}/>
+                    <Route path={"messages"} element={<Messages messages={props.state.messagesPage.messages} dialogs={props.state.messagesPage.dialogs}/>}/>
                     <Route path={"news"} element={<News/>}/>
                     <Route path={"music"} element={<Music/>}/>
                     <Route path={"settings"} element={<Settings/>}/>
