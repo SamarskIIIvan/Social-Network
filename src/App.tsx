@@ -8,18 +8,18 @@ import {Messages} from "./components/Messages/Messages";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {AppPropsType} from "./index";
+import { StatePropsType} from "./Redux/state";
 
 
-function App(props:AppPropsType) {
+function App(props:StatePropsType) {
     return (
         <div className="App-wrapper">
             <Header/>
             <Nav/>
             <div className={"content"}>
                 <Routes>
-                    <Route path={"profile"}  element={<Profile posts={props.posts}/>}/>
-                    <Route path={"messages"} element={<Messages messages={props.messages} dialogs={props.dialogs}/>}/>
+                    <Route path={"profile"}  element={<Profile posts={props.state.posts}/>}/>
+                    <Route path={"messages"} element={<Messages messages={props.state.messages} dialogs={props.state.dialogs}/>}/>
                     <Route path={"news"} element={<News/>}/>
                     <Route path={"music"} element={<Music/>}/>
                     <Route path={"settings"} element={<Settings/>}/>

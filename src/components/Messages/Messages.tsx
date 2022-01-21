@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Messages.module.scss"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {MessagesPropsType} from "../../index";
+import {MessagesPropsType} from "../../Redux/state";
 
 
 export function Messages(props:MessagesPropsType) {
