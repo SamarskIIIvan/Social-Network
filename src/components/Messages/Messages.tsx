@@ -9,11 +9,11 @@ export function Messages(props:MessagesPropsType) {
 
 
     const dialogsElements = props.dialogs
-        .map((dialog)=><Dialog name={dialog.name} id={dialog.id}/>)
+        .map((dialog)=><Dialog name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
 
     const messagesElements = props.messages
-            .map((message)=><Message message={message.message} id={message.id}/>)
+            .map((message)=><Message message={message.message} id={message.id} key={message.id}/>)
 
     return (
         <div className={s.messagesBlock}>

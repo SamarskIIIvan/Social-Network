@@ -6,7 +6,7 @@ import {PostsPropsType} from "../../../Redux/state";
 
 export function MyPosts(props:PostsPropsType){
 
-    const postsElements = props.posts.map((post)=><Post id={post.id} message={post.message}  likesCount={post.likesCount}/>)
+    const postsElements = props.posts.map((post)=><Post id={post.id} message={post.message}  likesCount={post.likesCount} key={post.id}/>)
 
 
     return(
