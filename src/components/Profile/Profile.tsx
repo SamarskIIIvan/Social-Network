@@ -5,11 +5,15 @@ import {ProfileInfo} from "./ProfileInfo";
 import {PostsPropsType} from "../../Redux/state";
 
 
-export function Profile(props:PostsPropsType){
-    return(
+export function Profile(props: PostsPropsType) {
+    return (
         <div className={s.profileBlock}>
-           <ProfileInfo/>
-          <MyPosts posts={props.posts} />
+            <ProfileInfo/>
+            <MyPosts
+                addPost={props.addPost}
+                posts={props.posts}
+                newPostText={props.newPostText}
+                updateNewPostText={props.updateNewPostText}/>
         </div>
     )
 }

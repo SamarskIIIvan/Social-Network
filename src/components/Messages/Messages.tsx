@@ -8,6 +8,7 @@ import {MessagesPropsType} from "../../Redux/state";
 export function Messages(props: MessagesPropsType) {
 
 
+
     const dialogsElements = props.dialogs
         .map((dialog) => <Dialog name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
@@ -15,13 +16,28 @@ export function Messages(props: MessagesPropsType) {
     const messagesElements = props.messages
         .map((message) => <Message message={message.message} id={message.id} key={message.id}/>)
 
+    const messageElements = React.createRef<HTMLTextAreaElement>()
+
+    const addMessage = () =>{
+        const text = messageElements.current?.value
+        alert(text)
+
+    }
+
     return (
         <div className={s.messagesBlock}>
             <div className={s.dialogs}>
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+               {messagesElements}
+                <div>
+                    <textarea ref={messageElements} />
+                </div>
+                <div>
+                    <button onClick={addMessage}>Add message</button>
+                </div>
+
             </div>
         </div>
     )
