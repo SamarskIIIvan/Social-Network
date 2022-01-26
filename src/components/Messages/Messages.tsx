@@ -2,27 +2,38 @@ import React from "react";
 import s from "./Messages.module.scss"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {MessagesPropsType} from "../../Redux/state";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../Redux/messages-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../../Redux/store";
+import {initialStateType} from "../../Redux/messages-reducer";
 
 
-export function Messages(props: MessagesPropsType) {
+export function Messages() {
 
+    const messagesPage =  useSelector<RootStateType, initialStateType>((state)=> state.messagesPage)
 
+    const dispatch = useDispatch()
 
-    const dialogsElements = props.dialogs
+    const dialogsElements = messagesPage.dialogs
         .map((dialog) => <Dialog name={dialog.name} id={dialog.id} key={dialog.id}/>)
 
 
-    const messagesElements = props.messages
+    const messagesElements = messagesPage.messages
         .map((message) => <Message message={message.message} id={message.id} key={message.id}/>)
 
-    const messageElements = React.createRef<HTMLTextAreaElement>()
+    const newMessageBody = messagesPage.newMessageBody
 
-    const addMessage = () =>{
-        const text = messageElements.current?.value
-        alert(text)
+
+
+    const onSendMessageClick = () => {
+        dispatch(sendMessageAC())
 
     }
+    const onNewMessageChange = (e: any) => {
+        let body = e.target.value
+        dispatch(updateNewMessageBodyAC(body))
+    }
+
 
     return (
         <div className={s.messagesBlock}>
@@ -30,12 +41,15 @@ export function Messages(props: MessagesPropsType) {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-               {messagesElements}
+                {messagesElements}
                 <div>
-                    <textarea ref={messageElements} />
+                    <textarea
+                        placeholder={'Enter your message'}
+                        value={newMessageBody}
+                        onChange={onNewMessageChange}/>
                 </div>
                 <div>
-                    <button onClick={addMessage}>Add message</button>
+                    <button onClick={onSendMessageClick}>Add message</button>
                 </div>
 
             </div>

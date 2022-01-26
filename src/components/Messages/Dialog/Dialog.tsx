@@ -1,10 +1,10 @@
 import React from "react";
 import s from "./Dialog.module.scss"
 import {NavLink} from "react-router-dom";
-import {DialogPropsType} from "../../../Redux/state";
+import {DialogType} from "../../../Redux/messages-reducer";
 
 
-export function Dialog(props:DialogPropsType){
+export function Dialog(props:DialogType){
 
     const path = "messages/" + props.id
 
