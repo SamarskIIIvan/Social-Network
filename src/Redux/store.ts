@@ -14,6 +14,7 @@ export type RootStateType = ReturnType<typeof rootReducer>
       sidebar: sidebarReducer,
   })
 
+
  export const store = createStore(rootReducer);
 
 

@@ -11,12 +11,12 @@ import {Settings} from "./components/Settings/Settings";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 
-function App() {
+export function App() {
     return (
         <div className="App-wrapper">
             <Header/>
             <Nav/>
-            <Sidebar />
+            <Sidebar/>
             <div className={"content"}>
                 <Routes>
                     <Route path={"profile"} element={<Profile/>}/>
@@ -30,4 +30,4 @@ function App() {
     );
 }
 
-export default App;
+

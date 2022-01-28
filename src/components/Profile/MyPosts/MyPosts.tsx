@@ -15,7 +15,6 @@ export function MyPosts(props: PostsPropsType) {
 
 
     const addPost = () => {
-        let action = {type: 'ADD-POST'}
         dispatch(addPostAC())
     }
 
@@ -36,7 +35,7 @@ export function MyPosts(props: PostsPropsType) {
                     <textarea
                         ref={newPostElement}
                         value={props.newPostText}
-                        onChange={onPostChange}></textarea>
+                        onChange={onPostChange}/>
                 </div>
                 <button onClick={addPost}>Add Post</button>
             </div>
