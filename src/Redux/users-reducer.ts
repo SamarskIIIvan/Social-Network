@@ -1,26 +1,23 @@
-
-
-
 type photosType = {
-    photos: {
-        small: string
-        large: string
-    }
+    small: string
+    large: string
+
 }
 
-export type UserType ={
-        name: string
-        id:number
-        photos: photosType
-        followed: boolean
+export type UserType = {
+    name: string
+    id: number
+    photos: photosType
+    followed: boolean
+    status: string
 }
 
 type initialStateType = {
-    users:Array<UserType>
+    users: Array<UserType>
 }
 
 
-const initialState:initialStateType = {
+const initialState: initialStateType = {
     users: []
 }
 
@@ -50,7 +47,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
         case "SET-USERS":
             return {
                 ...state,
-                users:[...state.users, ...action.users]
+                users: [...state.users, ...action.users]
             }
 
         default:
@@ -58,7 +55,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
     }
 }
 
- type UsersReducerActionsType = followACType
+type UsersReducerActionsType = followACType
     | unfollowACType
     | setUsersACType
 

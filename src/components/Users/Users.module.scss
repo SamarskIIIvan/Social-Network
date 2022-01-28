@@ -1,15 +1,12 @@
-.navBlock {
-  grid-area: n;
-  background-color: gray;
-  padding: 10px;
-  text-align: center;
 
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
-  a:active {
-    color: red
-  }
+.usersImg{
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+}
+.follow{
+  padding-left: 65px;
+}
+.name{
+  padding: 20px;
 }
