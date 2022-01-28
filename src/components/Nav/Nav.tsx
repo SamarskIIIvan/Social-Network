@@ -20,11 +20,12 @@ export function Nav(){
           <br/>
           <br/>
           <div>
+              <NavLink to={"users"}>Users</NavLink>
+          </div>
+          <br/>
+          <div>
               <NavLink to={"settings"}>Settings</NavLink>
           </div>
-
       </nav>
-
     )
-
 }

@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Sidebar} from "./components/Sidebar/Sidebar";
+import {Users} from "./components/Users/Users";
 
 
 export function App() {
@@ -23,6 +24,7 @@ export function App() {
                     <Route path={"messages"} element={<Messages/>}/>
                     <Route path={"news"} element={<News/>}/>
                     <Route path={"music"} element={<Music/>}/>
+                    <Route path={"users"} element={<Users/>}/>
                     <Route path={"settings"} element={<Settings/>}/>
                 </Routes>
             </div>

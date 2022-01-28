@@ -15,7 +15,7 @@ export function Sidebar() {
 
     return (
         <div className={s.sideBarBlock}>
-            <h3>Friends</h3>
+            <h2>Friends</h2>
             <div className={s.friends}>
                 {friendsElements}
             </div>
