@@ -1,20 +1,27 @@
+
+
+
 type photosType = {
     photos: {
         small: string
         large: string
     }
 }
-type initialStateType = typeof initialState
+
+export type UserType ={
+        name: string
+        id:number
+        photos: photosType
+        followed: boolean
+}
+
+type initialStateType = {
+    users:Array<UserType>
+}
 
 
-const initialState = {
-    users: [{
-        name: 'Ivan',
-        id: 1,
-        photos: "",
-        status: true,
-        followed: false,
-    }]
+const initialState:initialStateType = {
+    users: []
 }
 
 
@@ -51,7 +58,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
     }
 }
 
-type UsersReducerActionsType = followACType
+ type UsersReducerActionsType = followACType
     | unfollowACType
     | setUsersACType
 
@@ -62,4 +69,4 @@ type setUsersACType = ReturnType<typeof setUsersAC>
 
 export const followAC = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
-export const setUsersAC = (users: any) => ({type: 'SET-USERS', users} as const)
+export const setUsersAC = (users: Array<UserType>) => ({type: 'SET-USERS', users} as const)
