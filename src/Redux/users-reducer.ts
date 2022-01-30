@@ -4,6 +4,7 @@ type photosType = {
 
 }
 
+
 export type UserType = {
     name: string
     id: number
@@ -14,11 +15,17 @@ export type UserType = {
 
 type initialStateType = {
     users: Array<UserType>
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
 }
 
 
 const initialState: initialStateType = {
-    users: []
+    users: [],
+    totalUsersCount: 0,
+    pageSize: 100,
+    currentPage: 1,
 }
 
 
@@ -47,7 +54,15 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
         case "SET-USERS":
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
+            }
+        case "SET-CURRENT-PAGE":
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        case "SET-TOTAL-USERS-COUNT":
+            return {
+                ...state, totalUsersCount: action.count
             }
 
         default:
@@ -58,12 +73,21 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
 type UsersReducerActionsType = followACType
     | unfollowACType
     | setUsersACType
+    | setCurrentPageACType
+    | setTotalUsersCountACType
 
 
 type followACType = ReturnType<typeof followAC>
 type unfollowACType = ReturnType<typeof unfollowAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
+type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
 export const setUsersAC = (users: Array<UserType>) => ({type: 'SET-USERS', users} as const)
+export const setCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+    type: 'SET-TOTAL-USERS-COUNT',
+    count: totalUsersCount
+} as const)
