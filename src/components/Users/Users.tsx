@@ -2,15 +2,17 @@ import React, {useEffect} from "react";
 import s from "./Users.module.scss"
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
-import UserAva
-    from '../../assets/images/account_avatar_human_male_man_men_people_person_profile_user_users_icon_318585.png'
+import UserAva from '../../assets/images/account_avatar.png'
+import {Preloader} from "../common/Preloader/Preloager";
 
 
 export function Users(props: UsersPropsType) {
 
     useEffect(() => {
+        props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
             .then((res) => {
+                props.toggleIsFetching(false)
                 props.setUsers(res.data.items)
                 props.setTotalUsersCount(res.data.totalCount)
             })
@@ -24,14 +26,17 @@ export function Users(props: UsersPropsType) {
     }
     const onPageChanged = (pageNumber: any) => {
         props.setCurrentPage(pageNumber)
+        props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
             .then((res) => {
+                props.toggleIsFetching(false)
                 props.setUsers(res.data.items)
 
             })
     }
     return (
         <div className={s.UsersBlock}>
+            {props.isFetching ? <Preloader/> : null}
             <div>
                 {pages.map(page => {
                     //@ts-ignore
