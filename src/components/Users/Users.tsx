@@ -19,10 +19,10 @@ export function Users(props: UsersPropsType) {
 
     return (
         <div className={s.UsersBlock}>
-            <div>
-                {pages.map(page => {
+            <div >
+                {pages.map (page   => {
                     //@ts-ignore
-                    return <span className={props.currentPage === page && s.selectedPage}
+                    return <span  className={props.currentPage === page && s.selectedPage}
                                  onClick={(e) => {
                                      props.onPageChanged(page)
                                  }}>{page}</span>
@@ -40,7 +40,8 @@ export function Users(props: UsersPropsType) {
                 </div>
                 <div className={s.follow}>
                     {user.followed
-                        ? <button onClick={() => {
+                        ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                            {props.toggleFollowingProgress(true, user.id)}
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
                                 withCredentials: true,
                                 headers: {
@@ -51,10 +52,12 @@ export function Users(props: UsersPropsType) {
                                     if (res.data.resultCode === 0) {
                                         props.unfollow(user.id)
                                     }
+                                    {props.toggleFollowingProgress(false,user.id)}
                                 })
 
                         }}>Unfollow</button>
-                        : <button onClick={() => {
+                        : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                            {props.toggleFollowingProgress(true,user.id)}
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
                                 withCredentials: true,
                                 headers: {
@@ -65,6 +68,7 @@ export function Users(props: UsersPropsType) {
                                     if (res.data.resultCode === 0) {
                                         props.follow(user.id)
                                     }
+                                    {props.toggleFollowingProgress(false,user.id)}
                                 })
 
                         }}>Follow</button>
