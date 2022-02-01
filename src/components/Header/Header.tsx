@@ -15,7 +15,6 @@ export function Header() {
     useEffect(() => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
             .then((res) => {
-                debugger
                 let {id, email, login, isAuth} = res.data.data
                 if (res.data.resultCode === 0) {
                     dispatch(setUserData(id, email, login, isAuth))

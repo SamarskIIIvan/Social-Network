@@ -3,21 +3,11 @@ import s from "./Users.module.scss"
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 import UserAva from '../../assets/images/account_avatar.png'
-import {Preloader} from "../common/Preloader/Preloager";
 import {NavLink} from "react-router-dom";
 
 
 export function Users(props: UsersPropsType) {
 
-    useEffect(() => {
-        props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-            .then((res) => {
-                props.toggleIsFetching(false)
-                props.setUsers(res.data.items)
-                props.setTotalUsersCount(res.data.totalCount)
-            })
-    }, [])
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
@@ -25,25 +15,16 @@ export function Users(props: UsersPropsType) {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-    const onPageChanged = (pageNumber: any) => {
-        props.setCurrentPage(pageNumber)
-        props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
-            .then((res) => {
-                props.toggleIsFetching(false)
-                props.setUsers(res.data.items)
 
-            })
-    }
+
     return (
         <div className={s.UsersBlock}>
-            {props.isFetching ? <Preloader/> : null}
             <div>
-                {pages.map(page  => {
+                {pages.map(page => {
                     //@ts-ignore
-                    return <span className={props.currentPage === page && s.selectedPage }
+                    return <span className={props.currentPage === page && s.selectedPage}
                                  onClick={(e) => {
-                                     onPageChanged(page)
+                                     props.onPageChanged(page)
                                  }}>{page}</span>
                 })}
             </div>
@@ -60,10 +41,32 @@ export function Users(props: UsersPropsType) {
                 <div className={s.follow}>
                     {user.followed
                         ? <button onClick={() => {
-                            props.unfollow(user.id)
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,  {
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "32a2fb05-a0a6-4dbc-999f-c58d152b8cf3"
+                                }
+                            })
+                                .then((res) => {
+                                    if (res.data.resultCode === 0) {
+                                        props.unfollow(user.id)
+                                    }
+                                })
+
                         }}>Unfollow</button>
                         : <button onClick={() => {
-                            props.follow(user.id)
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},{
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "32a2fb05-a0a6-4dbc-999f-c58d152b8cf3"
+                                }
+                            })
+                                .then((res) => {
+                                    if (res.data.resultCode === 0) {
+                                        props.follow(user.id)
+                                    }
+                                })
+
                         }}>Follow</button>
                     }
                 </div>
