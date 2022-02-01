@@ -4,6 +4,7 @@ import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
 import UserAva from '../../assets/images/account_avatar.png'
 import {Preloader} from "../common/Preloader/Preloager";
+import {NavLink} from "react-router-dom";
 
 
 export function Users(props: UsersPropsType) {
@@ -38,9 +39,9 @@ export function Users(props: UsersPropsType) {
         <div className={s.UsersBlock}>
             {props.isFetching ? <Preloader/> : null}
             <div>
-                {pages.map(page => {
+                {pages.map(page  => {
                     //@ts-ignore
-                    return <span className={props.currentPage === page && s.selectedPage}
+                    return <span className={props.currentPage === page && s.selectedPage }
                                  onClick={(e) => {
                                      onPageChanged(page)
                                  }}>{page}</span>
@@ -49,9 +50,12 @@ export function Users(props: UsersPropsType) {
             {props.users.map(user => <div key={user.id}>
             <span>
                 <div>
-                    <img src={user.photos.small
-                    != null ? user.photos.small
-                        : UserAva} className={s.usersImg}/>
+                    <NavLink to={'/profile'}>
+                         <img src={user.photos.small
+                         != null ? user.photos.small
+                             : UserAva} className={s.usersImg}/>
+                    </NavLink>
+
                 </div>
                 <div className={s.follow}>
                     {user.followed
