@@ -4,6 +4,7 @@ import {messagesReducer} from "./messages-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import { createStore, combineReducers } from 'redux'
 import {usersReducer} from "./users-reducer";
+import {authReducer} from "./auth-reducer";
 
 
 
@@ -14,6 +15,8 @@ export type RootStateType = ReturnType<typeof rootReducer>
       messagesPage: messagesReducer,
       sidebar: sidebarReducer,
       usersPage:usersReducer,
+      auth: authReducer
+
   })
 
 
