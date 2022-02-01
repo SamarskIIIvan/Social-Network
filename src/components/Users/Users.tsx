@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import s from "./Users.module.scss"
 import {UsersPropsType} from "./UsersContainer";
 import axios from "axios";
@@ -41,7 +41,7 @@ export function Users(props: UsersPropsType) {
                 <div className={s.follow}>
                     {user.followed
                         ? <button onClick={() => {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,  {
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
                                 withCredentials: true,
                                 headers: {
                                     "API-KEY": "32a2fb05-a0a6-4dbc-999f-c58d152b8cf3"
@@ -55,7 +55,7 @@ export function Users(props: UsersPropsType) {
 
                         }}>Unfollow</button>
                         : <button onClick={() => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},{
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
                                 withCredentials: true,
                                 headers: {
                                     "API-KEY": "32a2fb05-a0a6-4dbc-999f-c58d152b8cf3"

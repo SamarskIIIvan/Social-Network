@@ -3,37 +3,42 @@ import {RootStateType} from "../../Redux/store";
 import {connect} from 'react-redux';
 import {Users} from "./Users";
 import {
-    follow, setCurrentPage, setTotalUsersCount,
-    setUsers, toggleIsFetching,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
     unfollow,
     UserType
 } from "../../Redux/users-reducer";
 import {Preloader} from "../common/Preloader/Preloager";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 
-class usersContainer extends React.Component<UsersContainerPropsType>{
+class usersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then((res) => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then((data) => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(res.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
-    onPageChanged = (pageNumber: any) => {
+
+    onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then((res) => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then((data) => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
+                this.props.setUsers(data.items)
 
             })
     }
+
     render() {
-        return<>
+        return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users users={this.props.users}
                    setUsers={this.props.setUsers}
@@ -51,8 +56,6 @@ class usersContainer extends React.Component<UsersContainerPropsType>{
         </>
     }
 }
-
-
 
 
 export type UsersContainerPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -76,12 +79,10 @@ type mapDispatchToPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 
 
-
 }
 type OwnPropsType = {
     onPageChanged: (pageNumber: number) => void
 }
-
 
 
 const mapStateToPropsType = (state: RootStateType): mapStateToPropsType => {
