@@ -1,3 +1,7 @@
+import {authAPI} from "../api/api";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {CommonActionsAppTypes, RootStateType} from "./store";
+
 export type initialStateType = typeof initialState
 
 const initialState = {
@@ -22,12 +26,24 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
     }
 }
 
-export type AuthReducerActionsType = SetUserDataType
+type ThunkType = ThunkAction<void, RootStateType, unknown, CommonActionsAppTypes>
+type ThunkDispatchAuthType = ThunkDispatch<RootStateType, unknown, CommonActionsAppTypes>
 
+export type AuthReducerActionsType = SetUserDataType
 type SetUserDataType = ReturnType<typeof setUserData>
 
 
-export const setUserData = (id: number | null, email: string | null, login: string | null,  isAuth: boolean)  => ({
+export const setUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: 'AUTH-REDUCER/SET-USER-DATA',
     payload: {id, email, login, isAuth}
 } as const)
+
+export const getAuthUserData = ():ThunkType => (dispatch:ThunkDispatchAuthType) => {
+    authAPI.me()
+        .then((res) => {
+            let {id, email, login, isAuth} = res.data.data
+            if (res.data.resultCode === 0) {
+                dispatch(setUserData(id, email, login, isAuth))
+            }
+        })
+}
