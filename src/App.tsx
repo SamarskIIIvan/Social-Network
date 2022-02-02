@@ -27,7 +27,7 @@ export function App() {
                     <Route path={"music"} element={<Music/>}/>
                     <Route path={"users"} element={<UsersContainer/>}/>
                     <Route path={"settings"} element={<Settings/>}/>
-                    <Route path={"login"} element={<Login/>}/>
+                    <Route path={"/login"} element={<Login/>}/>
                 </Routes>
             </div>
         </div>

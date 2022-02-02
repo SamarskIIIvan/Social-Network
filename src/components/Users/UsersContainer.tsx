@@ -10,9 +10,10 @@ import {
     UserType
 } from "../../Redux/users-reducer";
 import {Preloader} from "../common/Preloader/Preloager";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 
-class usersContainer extends React.Component<UsersContainerPropsType> {
+class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -78,5 +79,6 @@ const mapStateToPropsType = (state: RootStateType): mapStateToPropsType => {
     }
 }
 
+withAuthRedirect(UsersContainer)
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>(mapStateToPropsType,
-    {setCurrentPage, getUsers, follow, unfollow})(usersContainer)
+    {setCurrentPage, getUsers, follow, unfollow})(UsersContainer)

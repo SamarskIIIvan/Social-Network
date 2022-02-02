@@ -10,6 +10,7 @@ export function ProfileInfo(props: ProfileInfoPropsType ){
     if (!props.profile){
         return <Preloader/>
     }
+
     return(
         <div className={s.profileInfoBlock}>
             <img src={"https://www.salvat.com/colecciones/marvel-mugs/images/bodegon-marvel422x405.png?crc=303771931"}/>
