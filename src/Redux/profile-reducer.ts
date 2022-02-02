@@ -103,8 +103,8 @@ export const setUserProfileAC = (profile: ProfileType) => ({
 } as const)
 
 
-export const getUserProfile = (): ThunkType => (dispatch: ThunkDispatchProfileType) => {
-    usersAPI.getProfile()
+export const getUserProfile = (userId: any): ThunkType => (dispatch: ThunkDispatchProfileType) => {
+    usersAPI.getProfile(userId)
         .then((res) => {
             dispatch(setUserProfileAC(res.data))
         })

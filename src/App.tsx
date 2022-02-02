@@ -10,6 +10,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import UsersContainer from "./components/Users/UsersContainer";
+import {Login} from "./components/Login/Login";
 
 
 export function App() {
@@ -20,12 +21,13 @@ export function App() {
             <Sidebar/>
             <div className={"content"}>
                 <Routes>
-                    <Route path={"profile"} element={<Profile/>}/>
+                    <Route path={"/profile/:userId"} element={<Profile/>}/>
                     <Route path={"messages"} element={<Messages/>}/>
                     <Route path={"news"} element={<News/>}/>
                     <Route path={"music"} element={<Music/>}/>
                     <Route path={"users"} element={<UsersContainer/>}/>
                     <Route path={"settings"} element={<Settings/>}/>
+                    <Route path={"login"} element={<Login/>}/>
                 </Routes>
             </div>
         </div>

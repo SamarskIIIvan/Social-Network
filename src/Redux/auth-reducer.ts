@@ -2,7 +2,7 @@ import {authAPI} from "../api/api";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {CommonActionsAppTypes, RootStateType} from "./store";
 
-export type initialStateType = typeof initialState
+export type initialAuthStateType = typeof initialState
 
 const initialState = {
     id: null as number | null,
@@ -12,7 +12,7 @@ const initialState = {
 }
 
 
-export const authReducer = (state: initialStateType = initialState, action: AuthReducerActionsType): initialStateType => {
+export const authReducer = (state: initialAuthStateType = initialState, action: AuthReducerActionsType): initialAuthStateType => {
     switch (action.type) {
         case "AUTH-REDUCER/SET-USER-DATA":
             return {

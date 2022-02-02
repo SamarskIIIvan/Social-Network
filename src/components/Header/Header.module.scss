@@ -2,10 +2,13 @@
 .headerBlock {
     grid-area: h;
     background-color: yellow;
-        a{
+    .navLogin{
             float: right;
             color: royalblue;
             text-decoration: none;
+        a{
+            text-decoration: none;
+        }
     }
 img{
     width: 90px;

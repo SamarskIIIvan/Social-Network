@@ -5,8 +5,6 @@ import {Preloader} from "../common/Preloader/Preloager";
 
 
 
-
-
 export function ProfileInfo(props: ProfileInfoPropsType ){
 
     if (!props.profile){

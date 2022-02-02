@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler} from "react";
+import React from "react";
 import s from "./Messages.module.scss"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
@@ -6,13 +6,15 @@ import {sendMessageAC, updateNewMessageBodyAC} from "../../Redux/messages-reduce
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../Redux/store";
 import {initialStateType} from "../../Redux/messages-reducer";
+import {initialAuthStateType} from "../../Redux/auth-reducer";
+import {Navigate} from "react-router-dom";
 
 
 export function Messages() {
 
     const messagesPage =  useSelector<RootStateType, initialStateType>((state)=> state.messagesPage)
+    const isAuthPage =  useSelector<RootStateType,initialAuthStateType>((state)=> state.auth)
     const dispatch = useDispatch()
-
     const dialogsElements = messagesPage.dialogs
         .map((dialog) => <Dialog name={dialog.name} id={dialog.id} key={dialog.id}/>)
     const messagesElements = messagesPage.messages
@@ -31,6 +33,7 @@ export function Messages() {
     }
 
 
+    if (!isAuthPage.isAuth ) return <Navigate to={'/login'}/>
     return (
         <div className={s.messagesBlock}>
             <div className={s.dialogs}>
