@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {RootStateType} from "../../Redux/store";
 import {connect} from 'react-redux';
 import {Users} from "./Users";
@@ -11,7 +11,7 @@ import {
 } from "../../Redux/users-reducer";
 import {Preloader} from "../common/Preloader/Preloager";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
-
+import { compose} from 'redux'
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
@@ -79,6 +79,9 @@ const mapStateToPropsType = (state: RootStateType): mapStateToPropsType => {
     }
 }
 
-withAuthRedirect(UsersContainer)
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>(mapStateToPropsType,
-    {setCurrentPage, getUsers, follow, unfollow})(UsersContainer)
+
+export default  compose<ComponentType>(
+    withAuthRedirect,
+    connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>(mapStateToPropsType,
+        {setCurrentPage, getUsers, follow, unfollow}),
+)(UsersContainer)
