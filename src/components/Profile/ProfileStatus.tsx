@@ -1,23 +1,35 @@
 import React from "react";
 import s from './ProfileStatus.module.scss'
 
-type ProfileStatusPropsType ={
+type ProfileStatusPropsType = {
     status: string
+
 }
+
 export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+
+
     state = {
-        edgeMode: false
+        edgeMode: false,
+        status: this.props.status
     }
-    activeEditMode = () =>{
+    activeEditMode = () => {
         this.setState({
             edgeMode: true
         })
     }
-    deActiveEditMode = () =>{
+    deActiveEditMode = () => {
         this.setState({
             edgeMode: false
         })
     }
+    onStatusChange = (e: any) => {
+        this.setState({
+            status: e.currentTarget.value
+
+        })
+    }
+
     render() {
         return (
 
@@ -29,7 +41,8 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                 }
                 {this.state.edgeMode &&
                 <div>
-                    <input autoFocus={true} onBlur={this.deActiveEditMode} type="text" value={this.props.status}/>
+                    <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deActiveEditMode} type="text"
+                           value={this.state.status}/>
                 </div>
                 }
             </div>

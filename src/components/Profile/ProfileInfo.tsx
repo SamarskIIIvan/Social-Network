@@ -17,7 +17,7 @@ export function ProfileInfo(props: ProfileInfoPropsType ){
             <div className={s.profilePhoto}>
                 <img src={props.profile.photos.large}/>
             </div>
-            <ProfileStatus status={'Hello my friends'}/>
+            <ProfileStatus status={props.status}/>
         </div>
     )
 }

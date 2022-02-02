@@ -23,12 +23,19 @@ export const usersAPI = {
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
-    },
-    getProfile(userId: any){
-        return instance.get('profile/' + userId)
     }
 }
-
+export const profileAPI = {
+    getProfile(userId: any){
+        return instance.get(`profile/` + userId)
+    },
+    getStatus(userId:any){
+        return instance.get(`profile/status/` + userId)
+    },
+    updateStatus(status:string){
+        return instance.put(`profile/status`,{status:status})
+    }
+}
 export const authAPI = {
     me(){
       return instance.get(`auth/me`)
