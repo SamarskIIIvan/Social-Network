@@ -21,7 +21,7 @@ export function Profile() {
         dispatch(getUserProfile(userId))
     }, [])
 
-    if (!isAuthPage.isAuth) return <Navigate to={'/login'}/>
+    // if (!isAuthPage.isAuth) return <Navigate to={'/login'}/>
     return (
         <div className={s.profileBlock}>
             <ProfileInfo profile={profilePage.profile}/>
