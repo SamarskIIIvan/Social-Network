@@ -18,7 +18,6 @@ export const authReducer = (state: initialAuthStateType = initialState, action: 
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true
             }
 
         default:
@@ -43,7 +42,23 @@ export const getAuthUserData = ():ThunkType => (dispatch:ThunkDispatchAuthType) 
         .then((res) => {
             let {id, email, login, isAuth} = res.data.data
             if (res.data.resultCode === 0) {
-                dispatch(setUserData(id, email, login, isAuth))
+                dispatch(setUserData(id, email, login, true))
+            }
+        })
+}
+export const login = (email: string,password: string, rememberMe: string, captcha?: boolean):ThunkType => (dispatch:ThunkDispatchAuthType) => {
+    authAPI.login(email,password, rememberMe, captcha)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+               dispatch(getAuthUserData())
+            }
+        })
+}
+export const logout = ():ThunkType => (dispatch:ThunkDispatchAuthType) => {
+    authAPI.logout()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserData(null,null,null,false))
             }
         })
 }

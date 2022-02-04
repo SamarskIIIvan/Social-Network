@@ -8,14 +8,14 @@ export function LoginForm(props:any) {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="login" component={Input}  validate={[required]}  type="text"/>
+                <Field name={"email"} component={Input}  validate={[required]}  placeholder={"Login"}/>
 
             </div>
             <div>
-                <Field name="Password" component={Input} validate={[required]}  type="text"/>
+                <Field name={"password"} component={Input} validate={[required]}  placeholder={"Password"} type={"password"}/>
             </div>
             <div>
-                <Field name="rememberMe" component={Input}  type="checkbox"/> Remember me
+                <Field name={"rememberMe"} component={Input}  type={"checkbox"}/> Remember me
             </div>
             <div>
                 <button>login</button>
