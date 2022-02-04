@@ -5,7 +5,6 @@ import {profileAPI} from "../api/api";
 
 export type MyPostsPropsType = {
     posts: PostType[]
-    newPostText: string
 
 }
 export type ProfileInfoPropsType = {
@@ -48,7 +47,6 @@ export type initialStateType = typeof initialState
 
 const initialState = {
     posts: [{id: 1, message: "Hi i am programmer, mi names is Ivan", likesCount: 1000}] as Array<PostType>,
-    newPostText: '',
     profile: null as ProfileType | null,
     status:""
 }
@@ -60,18 +58,12 @@ export const profileReducer = (state: initialStateType = initialState, action: P
         case 'PROFILE-REDUCER/ADD-POST':
             let newPost = {
                 id: 2,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: '',
-            }
-        case 'PROFILE-REDUCER/UPDATE-NEW-POST-TEXT':
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case "PROFILE-REDUCER/SET-USER-PROFILE":
             return {
@@ -90,21 +82,16 @@ type ThunkType = ThunkAction<void, RootStateType, unknown, CommonActionsAppTypes
 type ThunkDispatchProfileType = ThunkDispatch<RootStateType, unknown, CommonActionsAppTypes>
 
 export type ProfileReducerActionsType = AddPostACType
-    | UpdateNewPostTextACType
     | setUserProfileACType
     | setStatusACType
 
 type AddPostACType = ReturnType<typeof addPostAC>
-type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 type setStatusACType = ReturnType<typeof setStatusAC>
 
-export const addPostAC = () => ({
-    type: 'PROFILE-REDUCER/ADD-POST'
-} as const)
-export const updateNewPostTextAC = (text: any) => ({
-    type: 'PROFILE-REDUCER/UPDATE-NEW-POST-TEXT',
-    newText: text
+export const addPostAC = (newPostText:string) => ({
+    type: 'PROFILE-REDUCER/ADD-POST',
+    newPostText
 } as const)
 export const setUserProfileAC = (profile: ProfileType) => ({
     type: 'PROFILE-REDUCER/SET-USER-PROFILE', profile

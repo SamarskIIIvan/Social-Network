@@ -2,12 +2,13 @@ import React from "react";
 import s from "./Messages.module.scss"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {sendMessageAC, updateNewMessageBodyAC} from "../../Redux/messages-reducer";
+import {sendMessageAC} from "../../Redux/messages-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../Redux/store";
 import {initialStateType} from "../../Redux/messages-reducer";
 import {initialAuthStateType} from "../../Redux/auth-reducer";
 import {Navigate} from "react-router-dom";
+import {AddMessageReduxForm} from "./Message/AddMessageForm";
 
 
 export function Messages() {
@@ -20,16 +21,10 @@ export function Messages() {
     const messagesElements = messagesPage.messages
         .map((message) => <Message message={message.message} id={message.id} key={message.id}/>)
 
-    const newMessageBody = messagesPage.newMessageBody
 
-
-
-    const onSendMessageClick = () => {
-        dispatch(sendMessageAC())
-    }
-    const onNewMessageChange = (event:any) => {
-        let body = event.target.value
-        dispatch(updateNewMessageBodyAC(body))
+    
+  const addNewMessage = (values:any) => {
+      dispatch(sendMessageAC(values.newMessageBody))
     }
 
 
@@ -41,16 +36,7 @@ export function Messages() {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <div>
-                    <textarea
-                        placeholder={'Enter your message'}
-                        value={newMessageBody}
-                        onChange={onNewMessageChange}/>
-                </div>
-                <div>
-                    <button onClick={onSendMessageClick}>Add message</button>
-                </div>
-
+                <AddMessageReduxForm onSubmit={addNewMessage} />
             </div>
         </div>
     )

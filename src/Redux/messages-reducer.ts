@@ -23,21 +23,14 @@ const initialState = {
         {id: 2, message: 'Hi i am Sasha'},
         {id: 3, message: 'Hi i am Valera'},
     ] as Array<MessageType>,
-    newMessageBody: ''
 }
 export const messagesReducer = (state:initialStateType = initialState, action: MessagesReducerActionsType):initialStateType => {
 
     switch (action.type) {
-        case 'MESSAGES-REDUCER/UPDATE-NEW-MESSAGE-BODY':
-            return  {
-                ...state,
-                newMessageBody: action.body
-            }
         case 'MESSAGES-REDUCER/SEND-MESSAGE':
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             return {
                 ...state,
-                newMessageBody:'',
                 messages: [...state.messages,{id: 4, message: body}]
             }
         default:
@@ -45,16 +38,11 @@ export const messagesReducer = (state:initialStateType = initialState, action: M
     }
 }
 
-export type MessagesReducerActionsType = UpdateNewMessageBodyACType
-    | SendMessageACType
+export type MessagesReducerActionsType = SendMessageACType
 
-type UpdateNewMessageBodyACType = ReturnType<typeof updateNewMessageBodyAC>
+
 type SendMessageACType = ReturnType<typeof sendMessageAC>
 
-export const updateNewMessageBodyAC = (body: any) => ({
-    type: 'MESSAGES-REDUCER/UPDATE-NEW-MESSAGE-BODY',
-    body: body
-} as const)
-export const sendMessageAC = () => ({type: 'MESSAGES-REDUCER/SEND-MESSAGE'} as const)
+export const sendMessageAC = (newMessageBody:string) => ({type: 'MESSAGES-REDUCER/SEND-MESSAGE',newMessageBody} as const)
 
 

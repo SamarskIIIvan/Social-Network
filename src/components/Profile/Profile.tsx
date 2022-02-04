@@ -28,7 +28,6 @@ export function Profile() {
             <ProfileInfo profile={profilePage.profile} status={profilePage.status}/>
             <MyPosts
                 posts={profilePage.posts}
-                newPostText={profilePage.newPostText}
             />
         </div>
     )
