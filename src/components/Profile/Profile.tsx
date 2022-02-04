@@ -6,6 +6,7 @@ import {RootStateType} from "../../Redux/store";
 import {useDispatch, useSelector} from "react-redux";
 import {getStatus, getUserProfile, initialStateType} from "../../Redux/profile-reducer";
 import {useParams} from "react-router-dom";
+import {initialAuthStateType} from "../../Redux/auth-reducer";
 
 
 
@@ -13,8 +14,10 @@ export function Profile() {
 
 
     const dispatch = useDispatch()
-    const {userId} = useParams()
+    let {userId} = useParams()
+
     const profilePage = useSelector<RootStateType, initialStateType>(state => state.profilePage)
+    const auth = useSelector<RootStateType, initialAuthStateType>(state => state.auth)
     useEffect(() => {
         dispatch(getUserProfile(userId))
     }, [])

@@ -1,6 +1,8 @@
 import {authAPI} from "../api/api";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {CommonActionsAppTypes, RootStateType} from "./store";
+import {stopSubmit} from "redux-form";
+
 
 export type initialAuthStateType = typeof initialState
 
@@ -46,11 +48,16 @@ export const getAuthUserData = ():ThunkType => (dispatch:ThunkDispatchAuthType) 
             }
         })
 }
-export const login = (email: string,password: string, rememberMe: string, captcha?: boolean):ThunkType => (dispatch:ThunkDispatchAuthType) => {
+export const login = (email: string,password: string, rememberMe: string, captcha?: boolean):ThunkType => (dispatch:any) => {
+
     authAPI.login(email,password, rememberMe, captcha)
         .then((res) => {
             if (res.data.resultCode === 0) {
                dispatch(getAuthUserData())
+            }
+            else {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error"
+                dispatch(stopSubmit("login", {_error: message}))
             }
         })
 }

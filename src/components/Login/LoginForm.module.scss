@@ -16,3 +16,12 @@
 .selectedPage {
   font-weight: bold;
 }
+.formSummaryError {
+  span {
+    border: solid 2px crimson;
+    color: red;
+  }
+}
+.loginBtn{
+  padding: 5px;
+}

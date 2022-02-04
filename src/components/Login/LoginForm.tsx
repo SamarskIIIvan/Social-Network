@@ -15,10 +15,14 @@ export function LoginForm(props:any) {
                 <Field name={"password"} component={Input} validate={[required]}  placeholder={"Password"} type={"password"}/>
             </div>
             <div>
-                <Field name={"rememberMe"} component={Input}  type={"checkbox"}/> Remember me
+                <Field name={"rememberMe"} component={Input}  type={"checkbox"}/>Remember me
             </div>
-            <div>
-                <button>login</button>
+
+            { props.error && <div className={s.formSummaryError}>
+             <span>{props.error}</span>
+            </div>}
+            <div className={s.loginBtn}>
+                <button>Login</button>
             </div>
         </form>
     )

@@ -21,7 +21,7 @@ export function App() {
             <Sidebar/>
             <div className={"content"}>
                 <Routes>
-                    <Route path={"/profile/:userId"} element={<Profile/>}/>
+                    <Route path={"profile/:userId?"} element={<Profile/>}/>
                     <Route path={"messages"} element={<Messages/>}/>
                     <Route path={"news"} element={<News/>}/>
                     <Route path={"music"} element={<Music/>}/>
