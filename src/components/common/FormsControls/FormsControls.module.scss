@@ -1,0 +1,27 @@
+.formControl{
+    textarea{
+      background-color: #dddddd;
+      color: #666666;
+      padding: 1em;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      outline: none;
+      width: 200px;
+      height: 50px;
+      transition: all 0.2s;
+      &:hover{
+        cursor: pointer;
+        background-color: #eeeeee;
+      }
+      &:focus{
+        cursor: text;
+        color: #333333;
+        background-color: white;
+        border-color:  #333333;
+      }
+    }
+    span{
+      display: flex;
+      color: crimson;
+    }
+  }
