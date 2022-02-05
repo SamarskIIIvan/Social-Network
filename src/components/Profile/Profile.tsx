@@ -11,8 +11,6 @@ import {initialAuthStateType} from "../../Redux/auth-reducer";
 
 
 export function Profile() {
-
-
     const dispatch = useDispatch()
     let {userId} = useParams()
 
