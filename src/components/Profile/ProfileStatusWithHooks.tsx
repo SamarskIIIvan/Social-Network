@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from "./ProfileStatus.module.scss";
 import {useDispatch} from "react-redux";
 import {updateStatus} from "../../Redux/profile-reducer";
@@ -10,9 +10,16 @@ type ProfileStatusPropsType = {
 }
 
 export function ProfileStatusWithHooks(props: ProfileStatusPropsType) {
+
     const dispatch = useDispatch()
+
     const [editMode, setEditMode] = useState(false)
     const [status, setStatus] = useState(props.status)
+
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     const activeEditMode = () => {
         setEditMode(true)
     }
@@ -33,7 +40,7 @@ export function ProfileStatusWithHooks(props: ProfileStatusPropsType) {
             }
             {editMode &&
             <div>
-                <input onChange={onStatusChange}  autoFocus={true} onBlur={deActiveEditMode} value={status}/>
+                <input onChange={onStatusChange} autoFocus={true} onBlur={deActiveEditMode} value={status}/>
             </div>
             }
         </div>
