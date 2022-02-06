@@ -11,7 +11,7 @@ import {Navigate} from "react-router-dom";
 import {AddMessageReduxForm} from "./Message/AddMessageForm";
 
 
-export function Messages() {
+ function Messages() {
 
     const messagesPage =  useSelector<RootStateType, initialStateType>((state)=> state.messagesPage)
     const isAuthPage =  useSelector<RootStateType,initialAuthStateType>((state)=> state.auth)
@@ -41,3 +41,4 @@ export function Messages() {
         </div>
     )
 }
+export default Messages

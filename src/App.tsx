@@ -2,9 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Nav} from "./components/Nav/Nav";
-import {Profile} from "./components/Profile/Profile";
 import {Route, Routes} from "react-router-dom";
-import {Messages} from "./components/Messages/Messages";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -16,6 +14,8 @@ import {initialAppStateType, initializeApp} from "./Redux/app-reducer";
 import {RootStateType} from "./Redux/store";
 import {Preloader} from "./components/common/Preloader/Preloager";
 
+const Messages = React.lazy(() => import('./components/Messages/Messages'));
+const Profile = React.lazy(() => import('./components/Profile/Profile'));
 
 export function App() {
 
@@ -37,8 +37,14 @@ export function App() {
             <Sidebar/>
             <div className={"content"}>
                 <Routes>
-                    <Route path={"/profile/:userId"} element={<Profile/>}/>
-                    <Route path={"messages"} element={<Messages/>}/>
+                    <Route path={"/profile/:userId"} element={
+                        <React.Suspense fallback={<Preloader/>}>
+                            <Profile/>
+                        </React.Suspense>}/>
+                    <Route path={"messages"} element={
+                        <React.Suspense fallback={<Preloader/>}>
+                            <Messages/>
+                        </React.Suspense>}/>
                     <Route path={"news"} element={<News/>}/>
                     <Route path={"music"} element={<Music/>}/>
                     <Route path={"users"} element={<UsersContainer/>}/>

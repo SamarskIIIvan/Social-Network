@@ -1,10 +1,13 @@
 .paginatorBlock{
   margin: 10px;
   .pageNumber{
+    color: #333333;
     padding: 2px;
-    border: 1px #666666 solid;
+    border: 1px #333333 solid;
   }
   .selectedPage {
+    border: 1px #666666 solid;
+    color:#666666 ;
     font-weight: bold;
     .selectedPage{
       font-weight: bold;

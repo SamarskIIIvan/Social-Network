@@ -10,7 +10,7 @@ import {useParams} from "react-router-dom";
 
 
 
-export function Profile() {
+ function Profile() {
     const dispatch = useDispatch()
     let {userId} = useParams()
 
@@ -32,3 +32,4 @@ export function Profile() {
         </div>
     )
 }
+export default Profile
