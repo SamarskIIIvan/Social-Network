@@ -79,7 +79,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             }
         case "PROFILE-REDUCER/DELETE-POST":
             return {
-                ...state,posts: state.posts.filter(post=>post.id != action.postId)
+                ...state, posts: state.posts.filter(post => post.id != action.postId)
             }
         default:
             return state
@@ -108,28 +108,25 @@ export const setUserProfileAC = (profile: ProfileType) => ({
 export const setStatusAC = (status: string) => ({
     type: 'PROFILE-REDUCER/SET-STATUS', status
 } as const)
-export const deletePostAC = (postId:any) => ({
-    type: 'PROFILE-REDUCER/DELETE-POST',postId
+export const deletePostAC = (postId: any) => ({
+    type: 'PROFILE-REDUCER/DELETE-POST', postId
 } as const)
 
 
-export const getUserProfile = (userId: any): ThunkType => (dispatch: ThunkDispatchProfileType) => {
-    profileAPI.getProfile(userId)
-        .then((res) => {
-            dispatch(setUserProfileAC(res.data))
-        })
+export const getUserProfile = (userId: any): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
+    let res = await
+        profileAPI.getProfile(userId)
+    dispatch(setUserProfileAC(res.data))
 }
-export const getStatus = (userId: any): ThunkType => (dispatch: ThunkDispatchProfileType) => {
-    profileAPI.getStatus(userId)
-        .then((res) => {
-            dispatch(setStatusAC(res.data))
-        })
+export const getStatus = (userId: any): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
+    let res = await
+        profileAPI.getStatus(userId)
+    dispatch(setStatusAC(res.data))
 }
-export const updateStatus = (status: string): ThunkType => (dispatch: ThunkDispatchProfileType) => {
-    profileAPI.updateStatus(status)
-        .then((res) => {
-            if (res.data.resultCode === 0) {
-                dispatch(setStatusAC(status))
-            }
-        })
+export const updateStatus = (status: string): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
+    let res = await
+        profileAPI.updateStatus(status)
+    if (res.data.resultCode === 0) {
+        dispatch(setStatusAC(status))
+    }
 }

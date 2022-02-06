@@ -1,4 +1,3 @@
-import {authAPI} from "../api/api";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {CommonActionsAppTypes, RootStateType} from "./store";
 import {getAuthUserData} from "./auth-reducer";

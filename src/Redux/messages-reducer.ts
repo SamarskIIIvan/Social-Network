@@ -1,5 +1,3 @@
-
-
 export type MessageType = {
     message: string
     id: number
@@ -24,14 +22,14 @@ const initialState = {
         {id: 3, message: 'Hi i am Valera'},
     ] as Array<MessageType>,
 }
-export const messagesReducer = (state:initialStateType = initialState, action: MessagesReducerActionsType):initialStateType => {
+export const messagesReducer = (state: initialStateType = initialState, action: MessagesReducerActionsType): initialStateType => {
 
     switch (action.type) {
         case 'MESSAGES-REDUCER/SEND-MESSAGE':
             let body = action.newMessageBody
             return {
                 ...state,
-                messages: [...state.messages,{id: 4, message: body}]
+                messages: [...state.messages, {id: 4, message: body}]
             }
         default:
             return state
@@ -43,6 +41,9 @@ export type MessagesReducerActionsType = SendMessageACType
 
 type SendMessageACType = ReturnType<typeof sendMessageAC>
 
-export const sendMessageAC = (newMessageBody:string) => ({type: 'MESSAGES-REDUCER/SEND-MESSAGE',newMessageBody} as const)
+export const sendMessageAC = (newMessageBody: string) => ({
+    type: 'MESSAGES-REDUCER/SEND-MESSAGE',
+    newMessageBody
+} as const)
 
 

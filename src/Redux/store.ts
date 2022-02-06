@@ -4,10 +4,9 @@ import {sidebarReducer} from "./sidebar-reducer";
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {usersReducer, UsersReducerActionsType} from "./users-reducer";
 import {authReducer, AuthReducerActionsType} from "./auth-reducer";
-import { reducer as formReducer } from 'redux-form'
+import {reducer as formReducer} from 'redux-form'
 import thunk from "redux-thunk";
 import {appReducer, AppReducerActionsType} from "./app-reducer";
-
 
 export type CommonActionsAppTypes = AuthReducerActionsType
     | MessagesReducerActionsType
@@ -23,12 +22,10 @@ const rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    app:appReducer,
-    form:formReducer,
+    app: appReducer,
+    form: formReducer,
 
 })
-
-
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 
