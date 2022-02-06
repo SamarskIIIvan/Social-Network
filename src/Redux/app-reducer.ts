@@ -35,7 +35,7 @@ export const iInitializedSuccess = () => ({
     type: 'APP-REDUCER/SET-INITIALIZED-SUCCESS'
 } as const)
 
-export const initializedApp = (): ThunkType => (dispatch: ThunkDispatchAuthType) => {
+export const initializeApp = (): ThunkType => (dispatch: ThunkDispatchAuthType) => {
     let promise = dispatch(getAuthUserData())
     Promise.all([promise])
         .then(() => {

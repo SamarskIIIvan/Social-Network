@@ -5,7 +5,6 @@ import {CommonActionsAppTypes, RootStateType} from "./store";
 type photosType = {
     small: string
     large: string
-
 }
 export type UserType = {
     name: string

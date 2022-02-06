@@ -9,7 +9,6 @@ export function LoginForm(props:any) {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field name={"email"} component={Input}  validate={[required]}  placeholder={"Login"}/>
-
             </div>
             <div>
                 <Field name={"password"} component={Input} validate={[required]}  placeholder={"Password"} type={"password"}/>
