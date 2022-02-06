@@ -44,6 +44,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                    getUsers={this.props.getUsers}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
+                   portionSize={this.props.portionSize}
             />
         </>
     }
@@ -59,6 +60,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    portionSize:number
     followingInProgress: number[]
 
 }
@@ -83,7 +85,8 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
         totalUsersCount:getTotalUsersCount(state),
         currentPage:getCurrentPage(state),
         isFetching:getIsFetching(state),
-        followingInProgress:getFollowingInProgress(state)
+        followingInProgress:getFollowingInProgress(state),
+        portionSize:state.usersPage.portionSize
     }
 }
 

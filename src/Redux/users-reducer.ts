@@ -19,14 +19,16 @@ type initialStateType = {
     pageSize: number
     currentPage: number
     isFetching: boolean
+    portionSize:number
     followingInProgress: number[]
 }
 const initialState: initialStateType = {
     users: [],
     totalUsersCount: 0,
-    pageSize: 100,
+    pageSize: 10,
     currentPage: 1,
     isFetching: false,
+    portionSize: 10,
     followingInProgress: []
 }
 

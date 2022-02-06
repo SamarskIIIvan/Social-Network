@@ -9,7 +9,8 @@ export function Users(props: UsersPropsType) {
 
     return (
         <div className={s.UsersBlock}>
-            <Paginator onPageChanged={props.onPageChanged}
+            <Paginator portionSize={props.portionSize}
+                       onPageChanged={props.onPageChanged}
                        pageSize={props.pageSize}
                        currentPage={props.currentPage}
                        totalUsersCount={props.totalUsersCount}/>
