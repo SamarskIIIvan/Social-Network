@@ -38,7 +38,6 @@ export const iInitializedSuccess = () => ({
 
 export const initializedApp = (): ThunkType => (dispatch: ThunkDispatchAuthType) => {
     let promise = dispatch(getAuthUserData())
-    debugger
     Promise.all([promise])
         .then(() => {
             dispatch(iInitializedSuccess())

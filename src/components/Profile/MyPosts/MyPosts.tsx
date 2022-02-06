@@ -6,8 +6,7 @@ import {useDispatch} from "react-redux";
 import {AddPostReduxForm} from "./AddPostForm";
 
 
-export function MyPosts(props: MyPostsPropsType) {
-
+export const MyPosts = React.memo(function MyPosts(props: MyPostsPropsType) {
 
     const dispatch = useDispatch()
 
@@ -25,4 +24,4 @@ export function MyPosts(props: MyPostsPropsType) {
             {postsElements}
         </div>
     )
-}
+})
