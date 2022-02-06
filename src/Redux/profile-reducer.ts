@@ -18,7 +18,7 @@ export type PostType = {
     likesCount: number
 }
 
-type contacts = {
+export type contacts = {
     github: string
     vk: string
     facebook: string
@@ -29,11 +29,11 @@ type contacts = {
     mainLink: string
 }
 
-type photos = {
+export type photos = {
     small: string
     large: string
 }
-type ProfileType = {
+export type ProfileType = {
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -46,9 +46,13 @@ type ProfileType = {
 export type initialStateType = typeof initialState
 
 const initialState = {
-    posts: [{id: 1, message: "Hi i am programmer, mi names is Ivan", likesCount: 1000}] as Array<PostType>,
+    posts: [
+        {id: 1, message: "Hello! How are you?:)", likesCount: 1000},
+        {id: 2, message: "Hi i am programmer!", likesCount: 100},
+        {id: 3, message: "Hi!", likesCount: 2},
+    ] as Array<PostType>,
     profile: null as ProfileType | null,
-    status:""
+    status: ""
 }
 
 
@@ -73,7 +77,10 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             return {
                 ...state, status: action.status
             }
-
+        case "PROFILE-REDUCER/DELETE-POST":
+            return {
+                ...state,posts: state.posts.filter(post=>post.id != action.postId)
+            }
         default:
             return state
     }
@@ -84,12 +91,14 @@ type ThunkDispatchProfileType = ThunkDispatch<RootStateType, unknown, CommonActi
 export type ProfileReducerActionsType = AddPostACType
     | setUserProfileACType
     | setStatusACType
+    | deletePostACType
 
 type AddPostACType = ReturnType<typeof addPostAC>
 type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 type setStatusACType = ReturnType<typeof setStatusAC>
+type deletePostACType = ReturnType<typeof deletePostAC>
 
-export const addPostAC = (newPostText:string) => ({
+export const addPostAC = (newPostText: string) => ({
     type: 'PROFILE-REDUCER/ADD-POST',
     newPostText
 } as const)
@@ -98,6 +107,9 @@ export const setUserProfileAC = (profile: ProfileType) => ({
 } as const)
 export const setStatusAC = (status: string) => ({
     type: 'PROFILE-REDUCER/SET-STATUS', status
+} as const)
+export const deletePostAC = (postId:any) => ({
+    type: 'PROFILE-REDUCER/DELETE-POST',postId
 } as const)
 
 
@@ -116,7 +128,7 @@ export const getStatus = (userId: any): ThunkType => (dispatch: ThunkDispatchPro
 export const updateStatus = (status: string): ThunkType => (dispatch: ThunkDispatchProfileType) => {
     profileAPI.updateStatus(status)
         .then((res) => {
-            if (res.data.resultCode === 0){
+            if (res.data.resultCode === 0) {
                 dispatch(setStatusAC(status))
             }
         })

@@ -11,7 +11,10 @@ export const MyPosts = React.memo(function MyPosts(props: MyPostsPropsType) {
     const dispatch = useDispatch()
 
     const postsElements = props.posts
-        .map((post) => <Post id={post.id} message={post.message} likesCount={post.likesCount} key={post.id}/>)
+        .map((post) => <Post id={post.id}
+                                       message={post.message}
+                                       likesCount={post.likesCount}
+                                       key={post.id}/>)
 
     const addNewPost = (values: any) => {
         dispatch(addPostAC(values.newPostText))
