@@ -8,12 +8,9 @@ import {getStatus, getUserProfile, initialStateType} from "../../Redux/profile-r
 import {useParams} from "react-router-dom";
 
 
-
-
- function Profile() {
+function Profile() {
     const dispatch = useDispatch()
     let {userId} = useParams()
-
     const profilePage = useSelector<RootStateType, initialStateType>(state => state.profilePage)
     useEffect(() => {
         dispatch(getUserProfile(userId))
@@ -22,14 +19,14 @@ import {useParams} from "react-router-dom";
         dispatch(getStatus(userId))
     }, [])
 
-
     return (
         <div className={s.profileBlock}>
-            <ProfileInfo profile={profilePage.profile} status={profilePage.status}/>
+            <ProfileInfo profile={profilePage.profile} status={profilePage.status} isOwner={!!userId}/>
             <MyPosts
                 posts={profilePage.posts}
             />
         </div>
     )
 }
+
 export default Profile

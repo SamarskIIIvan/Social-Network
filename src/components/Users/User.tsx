@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Users.module.scss"
-import UserAva from '../../assets/images/account_avatar.png'
+import userAva from '../../assets/images/account_avatar.png'
 import {NavLink} from "react-router-dom";
 import {UserType} from "../../Redux/users-reducer";
 
@@ -19,7 +19,7 @@ export function User(props: UserPropsType) {
                     <NavLink to={'/profile/' + props.user.id}>
                          <img src={props.user.photos.small
                          != null ? props.user.photos.small
-                             : UserAva} className={s.usersImg}/>
+                             : userAva} className={s.usersImg}/>
                     </NavLink>
 
                 </div>

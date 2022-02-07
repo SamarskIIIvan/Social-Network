@@ -10,6 +10,7 @@ export type MyPostsPropsType = {
 export type ProfileInfoPropsType = {
     profile: ProfileType | null
     status: string
+    isOwner:any
 }
 
 export type PostType = {
@@ -18,7 +19,7 @@ export type PostType = {
     likesCount: number
 }
 
-export type contacts = {
+export type ContactsType = {
     github: string
     vk: string
     facebook: string
@@ -29,17 +30,17 @@ export type contacts = {
     mainLink: string
 }
 
-export type photos = {
-    small: string
-    large: string
+export type PhotosType = {
+    small:  string
+    large:  string
 }
 export type ProfileType = {
-    userId: number
+    userId: any
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: contacts
-    photos: photos
+    contacts: ContactsType
+    photos: PhotosType
 }
 
 
@@ -81,6 +82,11 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             return {
                 ...state, posts: state.posts.filter(post => post.id != action.postId)
             }
+        case "PROFILE-REDUCER/SAVE-PHOTO-SUCCESS":
+            return {
+                //@ts-ignore
+                ...state,profile: {...state.profile, photos:action.photos}
+            }
         default:
             return state
     }
@@ -92,11 +98,13 @@ export type ProfileReducerActionsType = AddPostACType
     | setUserProfileACType
     | setStatusACType
     | deletePostACType
+    | savePhotoSuccessACType
 
 type AddPostACType = ReturnType<typeof addPostAC>
 type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 type setStatusACType = ReturnType<typeof setStatusAC>
 type deletePostACType = ReturnType<typeof deletePostAC>
+type savePhotoSuccessACType = ReturnType<typeof savePhotoSuccessAC>
 
 export const addPostAC = (newPostText: string) => ({
     type: 'PROFILE-REDUCER/ADD-POST',
@@ -110,6 +118,9 @@ export const setStatusAC = (status: string) => ({
 } as const)
 export const deletePostAC = (postId: any) => ({
     type: 'PROFILE-REDUCER/DELETE-POST', postId
+} as const)
+export const savePhotoSuccessAC = (photos: PhotosType) => ({
+    type: 'PROFILE-REDUCER/SAVE-PHOTO-SUCCESS', photos
 } as const)
 
 
@@ -128,5 +139,12 @@ export const updateStatus = (status: string): ThunkType => async (dispatch: Thun
         profileAPI.updateStatus(status)
     if (res.data.resultCode === 0) {
         dispatch(setStatusAC(status))
+    }
+}
+export const savePhoto = (file:File): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
+    let res = await
+        profileAPI.savePhoto(file)
+    if (res.data.resultCode === 0) {
+     dispatch(savePhotoSuccessAC(res.data.data.photos))
     }
 }

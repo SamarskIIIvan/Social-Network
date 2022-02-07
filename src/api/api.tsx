@@ -23,27 +23,36 @@ export const usersAPI = {
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
-    }
+    },
 }
 export const profileAPI = {
-    getProfile(userId: any){
+    getProfile(userId: any) {
         return instance.get(`profile/` + userId)
     },
-    getStatus(userId:any){
+    getStatus(userId: any) {
         return instance.get(`profile/status/` + userId)
     },
-    updateStatus(status:string){
-        return instance.put(`profile/status`,{status:status})
-    }
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status: status})
+    },
+    savePhoto(photoFile: File) {
+        const formData = new FormData()
+        formData.append("image", photoFile)
+        return instance.put(`/profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
 }
 export const authAPI = {
-    me(){
-      return instance.get(`auth/me`)
+    me() {
+        return instance.get(`auth/me`)
     },
-    login(email: string,password: string, rememberMe: string, captcha?: boolean){
-        return instance.post(`auth/login`,{email, password, rememberMe, captcha})
+    login(email: string, password: string, rememberMe: string, captcha?: boolean) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`)
-    }
+    },
 }

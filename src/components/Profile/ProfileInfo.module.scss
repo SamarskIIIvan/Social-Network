@@ -1,3 +1,13 @@
-.profilePhoto{
-  padding: 10px;
+
+.profileInfoBlock {
+  input{
+    margin: 10px;
+  }
+  .profilePhoto {
+    img {
+      border-radius: 200px;
+      padding: 10px;
+      max-width: 200px;
+    }
+  }
 }
