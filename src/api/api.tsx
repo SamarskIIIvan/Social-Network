@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {ProfileType} from "../Redux/profile-reducer";
 
 
 const instance = axios.create({
@@ -44,15 +45,42 @@ export const profileAPI = {
             }
         })
     },
+    saveProfile(profile:ProfileType){
+        return instance.put(`profile`, profile)
+    }
+
 }
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return instance.get<MeResponseType>(`auth/me`)
     },
-    login(email: string, password: string, rememberMe: string, captcha?: boolean) {
-        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
+    login(email: string, password: string, rememberMe: boolean, captcha: null| string = null) {
+        return instance.post<LoginResponseType>(`auth/login`, {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete(`auth/login`)
     },
+
+}
+
+export enum ResultCodesEnum{
+    Success = 0,
+    Error = 1,
+    CaptchaIsRequired = 10
+}
+type MeResponseType = {
+    data:{
+        id: number
+        email: string
+        login: string
+}
+  resultCode: ResultCodesEnum
+  messages: Array<string>
+}
+type LoginResponseType = {
+    data:{
+        userId: number
+}
+  resultCode: ResultCodesEnum
+  messages: Array<string>
 }

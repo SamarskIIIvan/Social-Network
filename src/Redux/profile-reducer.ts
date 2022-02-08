@@ -1,6 +1,7 @@
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {CommonActionsAppTypes, RootStateType} from "./store";
 import {profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 
 export type MyPostsPropsType = {
@@ -28,11 +29,12 @@ export type ContactsType = {
     website: string
     youtube: string
     mainLink: string
+
 }
 
 export type PhotosType = {
-    small:  string
-    large:  string
+    small:  string | null
+    large:  string | null
 }
 export type ProfileType = {
     userId: any
@@ -42,7 +44,6 @@ export type ProfileType = {
     contacts: ContactsType
     photos: PhotosType
 }
-
 
 export type initialStateType = typeof initialState
 
@@ -125,26 +126,37 @@ export const savePhotoSuccessAC = (photos: PhotosType) => ({
 
 
 export const getUserProfile = (userId: any): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
-    let res = await
+    const res = await
         profileAPI.getProfile(userId)
     dispatch(setUserProfileAC(res.data))
 }
 export const getStatus = (userId: any): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
-    let res = await
+    const res = await
         profileAPI.getStatus(userId)
     dispatch(setStatusAC(res.data))
 }
 export const updateStatus = (status: string): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
-    let res = await
+    const res = await
         profileAPI.updateStatus(status)
     if (res.data.resultCode === 0) {
         dispatch(setStatusAC(status))
     }
 }
 export const savePhoto = (file:File): ThunkType => async (dispatch: ThunkDispatchProfileType) => {
-    let res = await
+    const res = await
         profileAPI.savePhoto(file)
     if (res.data.resultCode === 0) {
      dispatch(savePhotoSuccessAC(res.data.data.photos))
+    }
+}
+export const saveProfile = (profile:ProfileType): ThunkType => async (dispatch:ThunkDispatchProfileType, getState ) => {
+    const userId = getState().auth.id
+    const res = await
+        profileAPI.saveProfile(profile)
+    if (res.data.resultCode === 0) {
+     dispatch(getUserProfile(userId))
+    }
+    else {
+        dispatch(stopSubmit("edit-profile", {_error: res.data.messages[0]}))
     }
 }
