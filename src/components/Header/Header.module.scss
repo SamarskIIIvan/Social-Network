@@ -1,18 +1,19 @@
 
 .headerBlock {
     grid-area: h;
-    background-color: yellow;
+    background-color: #333333;
     .navLogin{
             float: right;
-            color: royalblue;
+            color: wheat;
             text-decoration: none;
         a{
             text-decoration: none;
         }
     }
 img{
-    width: 90px;
-    height: 90px;
+  margin: 5px;
+    width: 80px;
+    height: 80px;
 }
 
 }

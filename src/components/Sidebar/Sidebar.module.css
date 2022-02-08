@@ -1,6 +1,6 @@
 .sideBarBlock {
     grid-area: s;
-    background-color: aquamarine;
+    background-color: #333333;
     text-align: center;
-    color: navy;
+    color: whitesmoke;
 }
