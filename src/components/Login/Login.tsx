@@ -6,12 +6,20 @@ import {initialAuthStateType, login} from "../../Redux/auth-reducer";
 import {RootStateType} from "../../Redux/store";
 import {Navigate} from "react-router-dom";
 
-
-export function Login(props: any){
+export type LoginFormValuesType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string
+}
+export type LoginFormOwnProps = {
+    captchaUrl: string | null
+}
+export function Login(){
     const auth = useSelector<RootStateType, initialAuthStateType>(state => state.auth)
     const dispatch = useDispatch()
-    const onSubmit = (formData:any)=>{
-      dispatch(login(formData.email, formData.password, formData.rememberMe))
+    const onSubmit = (formData:LoginFormValuesType)=>{
+      dispatch(login(formData.email, formData.password, formData.rememberMe, formData.captcha))
     }
 
     if (auth.isAuth){
@@ -20,7 +28,7 @@ export function Login(props: any){
     return(
         <div className={s.login}>
          <h1>LOGIN</h1>
-           <LoginReduxForm onSubmit = {onSubmit}/>
+           <LoginReduxForm onSubmit = {onSubmit} captchaUrl = {auth.captchaUrl}/>
         </div>
     )
 }

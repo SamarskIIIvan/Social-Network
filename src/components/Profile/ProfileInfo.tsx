@@ -32,7 +32,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
             </div>
             {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
             {editMode
-                ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={props.profile} />
+                ? <ProfileDataReduxForm onSubmit={onSubmit} initialValues={props.profile} profile={props.profile} />
                 : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => {
                     setEditMode(true)
                 }}/>

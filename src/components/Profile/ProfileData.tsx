@@ -12,7 +12,7 @@ type ContactPropsType ={
     contactValues: string
 }
 
-export function ProfileData({profile,isOwner,goToEditMode}:ProfileDataPropsType) {
+export const ProfileData:React.FC<ProfileDataPropsType> = ({profile,isOwner,goToEditMode}) => {
 
     const Contact:React.FC<ContactPropsType> = ({contactTitle, contactValues}) => {
         return(

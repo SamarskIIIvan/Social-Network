@@ -1,17 +1,23 @@
 import React from "react";
 import s from "./LoginForm.module.scss"
-import {reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
+import {LoginFormOwnProps, LoginFormValuesType} from "./Login";
 
-export function LoginForm(props:any) {
+export const LoginForm:React.FC<InjectedFormProps<LoginFormValuesType,LoginFormOwnProps> & LoginFormOwnProps>
+    = ({handleSubmit, error, captchaUrl}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             {createField("Login","email", [required], Input)}
             {createField("Password","password", [required], Input, {type:"password"} )}
             {createField(undefined,"rememberMe", [required], Input, {type:"checkbox"},"remember me" )}
-            { props.error && <div className={s.formSummaryError}>
-             <span>{props.error}</span>
+
+            {captchaUrl && <img src={captchaUrl} />}
+            {captchaUrl && createField("Symbols from image ","captcha", [required], Input)}
+
+            { error && <div className={s.formSummaryError}>
+             <span>{error}</span>
             </div>}
             <div className={s.loginBtn}>
                 <button>Login</button>
@@ -20,4 +26,4 @@ export function LoginForm(props:any) {
     )
 }
 
-export const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+export const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({form: 'login'})(LoginForm)
